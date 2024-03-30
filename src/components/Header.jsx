@@ -34,9 +34,9 @@ const Header = () => {
           <HiOutlinePencilAlt className='sm:hidden text-[20px]' />
         </button>
 
-        {!session ? <button className='bg-gray-100 p-2 px-3 border rounded-md border-black' onClick={() => signIn("google")}>
+        {!session ? <button className='bg-gray-100 text-black p-2 px-3 border rounded-md border-black' onClick={() => signIn("google")}>
           <span className='hidden sm:block'>Sign In</span> <HiArrowLeftOnRectangle className='sm:hidden text-[20px]' />
-        </button> : <button className='bg-gray-100 p-2 px-3 border rounded-md border-black' onClick={() => signOut()}>
+        </button> : <button className='bg-gray-100 text-black p-2 px-3 border rounded-md border-black' onClick={() => signOut()}>
           <span className='hidden sm:block'>Sign Out</span> <HiArrowLeftOnRectangle className='sm:hidden text-[20px]' />
         </button>}
 
