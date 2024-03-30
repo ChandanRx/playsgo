@@ -1,6 +1,7 @@
 
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
+require('dotenv').config()
 
 const handler = NextAuth({
   // Configure one or more authentication providers
