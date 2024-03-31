@@ -39,11 +39,11 @@ const PostModal = ({ post }) => {
 
                                     <div className='flex gap-2 items-center mt-2 text-blue-950'>
 
-                                        <Image src={session?.user?.image} alt='user-image'
+                                        <Image src={post?.userImage} alt='user-image'
                                             width={40} height={40} className='rounded-full' />
                                         <div>
-                                            <h2 className='text-[14px] font-medium'>{session?.user?.name}</h2>
-                                            <h2 className='text-[14px] font-light'>{session?.user?.email}</h2>
+                                            <h2 className='text-[14px] font-medium'>{post?.userName}</h2>
+                                            <h2 className='text-[14px] font-light'>{post?.email}</h2>
 
                                         </div>
                                     </div>
