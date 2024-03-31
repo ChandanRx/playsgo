@@ -7,8 +7,8 @@ const handler = NextAuth({
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-        clientId: "668773180006-5gitlncc37q2n4seilmfenplr17deip8.apps.googleusercontent.com",
-        clientSecret: "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"
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET
       })
   ],
 })
