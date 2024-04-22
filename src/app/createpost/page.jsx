@@ -58,11 +58,11 @@ const CreatePost = () => {
             placeholder="Title"
             required
             onChange={handleChange}
-            className="w-auto mb-4 border-[1px] p-2 rounded-md"
+            className="w-auto text-black mb-4 border-[1px] p-2 rounded-md"
           />
           <textarea
             name="desc"
-            className="w-auto mb-4 outline-blue-400 border-[1px] p-2 rounded-md"
+            className="w-auto text-black mb-4 outline-blue-400 border-[1px] p-2 rounded-md"
             required
             onChange={handleChange}
             placeholder="Write Description here"
@@ -73,7 +73,7 @@ const CreatePost = () => {
             name="date"
             required
             onChange={handleChange}
-            className="w-auto mb-4 border-[1px] p-2 rounded-md"
+            className="w-auto text-black mb-4 border-[1px] p-2 rounded-md"
           />
           <input
             type="text"
@@ -81,13 +81,13 @@ const CreatePost = () => {
             name="location"
             required
             onChange={handleChange}
-            className="w-auto mb-4 border-[1px] p-2 rounded-md"
+            className="w-auto text-black mb-4 border-[1px] p-2 rounded-md"
           />
           <select
             name="game"
             required
             onChange={handleChange}
-            className="w-auto mb-4 border-[1px] p-2 rounded-md"
+            className="w-auto text-black mb-4 border-[1px] p-2 rounded-md"
           >
             <option disabled defaultValue>
               Select Game
