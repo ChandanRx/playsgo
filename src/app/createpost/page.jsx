@@ -101,7 +101,7 @@ const CreatePost = () => {
             placeholder='Image Url'
             required
             name="imageUrl"
-            className="mb-4 p-2 rounded-md border-[1px] w-auto"
+            className="mb-4 p-2 text-black rounded-md border-[1px] w-auto"
             onChange={handleChange}
           />
           <button
