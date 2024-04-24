@@ -24,10 +24,10 @@ const CreatePost = () => {
   const handleSubmitt = async (e) => {
  e.preventDefault();
 
-  if (!input.title || !input.desc || !input.date || !input.location || !input.game || !input.imageUrl) {
-    console.error("All fields are required.");
-    return;
-  }
+  // if (!input.title || !input.desc || !input.date || !input.location || !input.game || !input.imageUrl) {
+  //   console.error("All fields are required.");
+  //   return;
+  // }
 
   try {
     await setDoc(doc(db, "posts", Date.now().toString()), input);
