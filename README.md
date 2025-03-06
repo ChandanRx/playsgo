@@ -1,6 +1,4 @@
-![playsgo](https://github.com/user-attachments/assets/576f236e-00e4-4a95-adac-0158e404a3da)
-
-PlaysGo 🎮
+PlaysGo 🎮 (https://playsgo.vercel.app/)
 PlaysGo is a web application designed for gamers to connect and find players for their favorite games or post requests to gather teammates when needed. Built with Next.js and Firebase, PlaysGo aims to simplify the process of creating gaming communities.
 
 🌟 Features
@@ -14,3 +12,5 @@ Firebase:
 Database: Real-time data storage and management.
 Authentication: Secure user login for a personalized experience.
 PlaysGo connects gamers and helps them build communities, making it easier to enjoy multiplayer games with the right teammates.
+
+![playsgo](https://github.com/user-attachments/assets/576f236e-00e4-4a95-adac-0158e404a3da)
