@@ -1,61 +1,73 @@
 "use client"
 import React from 'react'
-import { HiLocationMarker, HiOutlineCalendar, HiOutlineXCircle} from 'react-icons/hi'
-import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { HiLocationMarker, HiOutlineCalendar, HiOutlineXCircle } from 'react-icons/hi'
+import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 
 const PostModal = ({ post }) => {
-    const {data:session} = useSession()
-    return (
-        <div>
-            <dialog id="my_modal_1" className="modal rounded-lg">
-                <div className="modal-box">
-                    <div className="modal-action">
-                        <form method="dialog">
-                            <button className="absolute right-2 top-2">
-                                <HiOutlineXCircle className='text-[32px] text-red-800' />
-                            </button>
-                            <div className="max-w-sm border border-gray-500 rounded-lg shadow bg-gradient-to-r from-gray-100 to-slate-200">
-                                <img className="rounded-t-lg w-full h-[180px] border border-gray-400" src={post?.imageUrl} alt="poster" />
-                                <div className="p-5">
+  const { data: session } = useSession()
 
-                                    <h5 className="mb-2 text-xl font-bold tracking-tight text-blue-950">{post?.title}</h5>
+  return (
+    <div>
+      <dialog id="my_modal_1" className="modal">
+        <div className="modal-box bg-yellow-200 text-[#1a1a1a] p-0 border-2 border-[#1a1a1a] shadow-xl animate-fadeSlideIn">
+          <div className="modal-action m-0 p-0 relative">
+            <form method="dialog" className="w-full">
+              {/* Close Button */}
+              <button className="absolute right-3 top-3 hover:text-red-500 transition-colors">
+                <HiOutlineXCircle className="text-[30px] text-[#1a1a1a] hover:text-red-500" />
+              </button>
 
-                                    <div className='flex items-center text-blue-900 gap-2 mb-2'>
-                                        <HiOutlineCalendar className='text-[20px]' />
-                                        {post?.date}
-                                    </div>
+              <div className="border-t border-yellow-600">
+                {/* Image */}
+                <img
+                  className="w-full h-[180px] object-cover border-b border-yellow-600"
+                  src={post?.imageUrl}
+                  alt="poster"
+                />
 
-                                    <div className='flex items-center text-gray-800 gap-2 mb-2'>
-                                        <HiLocationMarker className='text-[20px]' />
-                                        {post?.location}
-                                    </div>
+                {/* Content with Tailwind animation */}
+                <div className="p-4 transition-all duration-500 ease-out animate-fadeSlideIn">
+                  <h5 className="text-xl font-bold text-[#1a1a1a] mb-3">{post?.title}</h5>
 
-                                    <p className="mb-2 font-normal text-gray-800">
-                                        if you're intrested contact on below details hurry up....
-                                    </p>
+                  <div className="flex items-center gap-2 text-[#1a1a1a] mb-2 text-sm">
+                    <HiOutlineCalendar className="text-lg" />
+                    {post?.date}
+                  </div>
 
-                                    <div className='border' />
+                  <div className="flex items-center gap-2 text-[#1a1a1a] mb-3 text-sm">
+                    <HiLocationMarker className="text-lg" />
+                    {post?.location}
+                  </div>
 
-                                    <div className='flex gap-2 items-center mt-2 text-blue-950'>
+                  <p className="text-sm mb-4 text-[#1a1a1a]">
+                    If you're interested, contact using the details below. Hurry up!
+                  </p>
 
-                                        <Image src={post?.userImage} alt='user-image'
-                                            width={40} height={40} className='rounded-full' />
-                                        <div>
-                                            <h2 className='text-[14px] font-medium'>{post?.userName}</h2>
-                                            <h2 className='text-[14px] font-light'>{post?.email}</h2>
+                  <div className="border-t border-yellow-600 mb-4" />
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
+                  {/* User Info */}
+                  <div className="flex gap-3 items-center">
+                    <Image
+                      src={post?.userImage}
+                      alt="user-image"
+                      width={40}
+                      height={40}
+                      className="rounded-full border border-yellow-400"
+                    />
+                    <div>
+                      <h2 className="text-[14px] font-semibold">{post?.userName}</h2>
+                      <h2 className="text-[13px] font-light">{post?.email}</h2>
                     </div>
+                  </div>
                 </div>
-            </dialog>
+              </div>
+            </form>
+          </div>
         </div>
-    )
+      </dialog>
+    </div>
+  )
 }
 
 export default PostModal

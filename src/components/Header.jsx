@@ -8,45 +8,73 @@ import { HiArrowLeftOnRectangle } from "react-icons/hi2";
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation';
 
-
 const Header = () => {
   const router = useRouter();
   const { data: session } = useSession()
   return (
-    <div className='flex justify-between p-3 border-b-[1px] border-orange-600'>
-      {/*<Image
-        src={logo}
-        width={140}
-        alt='logo'
-        className='h-14 rounded-lg'
-        onClick={()=>router.push('/')} />
-  */}
-  <div  className=' rounded-lg font-bold text-white ml-2 mt-3 text-[20px]'>
-  <h1 onClick={()=>router.push('/')} className='cursor-pointer'>PLAYS<span className='text-blue-900'>GO</span></h1>
-  </div>
-      <div className='flex gap-4 p-1'>
+<div className="sticky top-0 z-[999] bg-[#333333] flex justify-between p-3 border-b border-[#FBBF24] shadow-md">
 
-        <button
-          className='bg-blue-950 hover:bg-blue-900 p-2 px-3 rounded-md text-white'
-          onClick={()=>router.push('/createpost')}
-        >
-          <span className='hidden sm:block'>Create Post</span>
-          <HiOutlinePencilAlt className='sm:hidden text-[20px]' />
-        </button>
+{/* Logo */}
+<div className="rounded-lg font-bold text-[#FFD700] ml-2 mt-3 text-[22px] tracking-wide">
+  <h1 onClick={() => router.push('/')} className="cursor-pointer transition-all hover:scale-105">
+    PLAYS<span className="text-black bg-[#FFD700] px-1 py-0.5 rounded">GO</span>
+  </h1>
+</div>
 
-        {!session ? <button className='bg-gray-100 text-black p-2 px-3 border rounded-md border-black' onClick={() => signIn("google")}>
-          <span className='hidden sm:block'>Sign In</span> <HiArrowLeftOnRectangle className='sm:hidden text-[20px]' />
-        </button> : <button className='bg-gray-100 text-black p-2 px-3 border rounded-md border-black' onClick={() => signOut()}>
-          <span className='hidden sm:block'>Sign Out</span> <HiArrowLeftOnRectangle className='sm:hidden text-[20px]' />
-        </button>}
+{/* Right Side Buttons */}
+<div className="flex gap-4 p-1">
 
-        {session?  
-       <Image src={session?session?.user?.image:USER_IMG} alt='user image'
-        className='rounded-full cursor-pointer' onClick={()=>router.push('/profile')}
-        width={40} height={40} />:null}
-      </div>
+  {/* Create Post Button */}
+  <button
+    className="bg-[#1c1c1c] text-[#FFD700] hover:text-black hover:bg-[#FFD700]  px-4 py-2 rounded-md shadow-md 
+               hover:scale-105 
+               transition-all duration-300 ease-in-out
+               flex items-center gap-2"
+    onClick={() => router.push('/createpost')}
+  >
+    <span className="hidden sm:block">Create Post</span>
+    <HiOutlinePencilAlt className="sm:hidden text-[20px]" />
+  </button>
 
-    </div>
+  {/* Sign In / Sign Out Button */}
+  {!session ? (
+    <button
+      className="px-4 py-2 rounded-md shadow-md hover:shadow-lg
+                  text-[#1c1c1c] bg-[#FFD700] hover:text-[#FFD700] hover:bg-[#1c1c1c] hover:scale-105
+                 transition-all duration-300 ease-in-out
+                 flex items-center gap-2"
+      onClick={() => signIn("google")}
+    >
+      <span className="hidden sm:block">Sign In</span>
+      <HiArrowLeftOnRectangle className="sm:hidden text-[20px]" />
+    </button>
+  ) : (
+    <button
+   className="px-4 py-2 rounded-md shadow-md hover:shadow-lg
+                 text-[#1c1c1c] bg-yellow-600 hover:text-yellow-300 hover:bg-[#1c1c1c] hover:scale-105
+                 transition-all duration-300 ease-in-out
+                 flex items-center gap-2"
+      onClick={() => signOut()}
+    >
+      <span className="hidden sm:block">Sign Out</span>
+      <HiArrowLeftOnRectangle className="sm:hidden text-[20px]" />
+    </button>
+  )}
+
+  {/* User Image */}
+  {session && (
+    <Image
+      src={session?.user?.image || USER_IMG}
+      alt="user image"
+      className="rounded-full cursor-pointer border-2 border-[#FBBF24]"
+      width={40}
+      height={40}
+      onClick={() => router.push('/profile')}
+    />
+  )}
+</div>
+</div>
+
   )
 }
 

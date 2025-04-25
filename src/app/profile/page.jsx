@@ -1,55 +1,78 @@
-"use client"
-import { collection, deleteDoc, doc, getDocs, getFirestore, query, where } from 'firebase/firestore'
-import { useSession } from 'next-auth/react'
-import React, { useEffect, useState } from 'react'
-import app from '../../../firebaseConfig'
-import PostItems from '../../components/PostItems'
+"use client";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import app from "../../../firebaseConfig";
+import PostItems from "../../components/PostItems";
 
-const profile = () => {
-    const { data: session } = useSession()
-    const db = getFirestore(app)
-    const [userPost, setUserPost] = useState([]);
-    useEffect(() => {
-        getUserPost()
-    }, [session])
+const Profile = () => {
+  const { data: session } = useSession();
+  const db = getFirestore(app);
+  const [userPost, setUserPost] = useState([]);
 
-    const getUserPost = async () => {
-        if (session?.user?.email) {
-            const q = query(collection(db, "posts"), where("email", "==", session?.user?.email))
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                let data = doc.data()
-                data.id = doc.id
-                setUserPost(userPost => [...userPost, data])
-            })
-        }
+  useEffect(() => {
+    if (session?.user?.email) {
+      getUserPost();
     }
+  }, [session]);
 
-    const onDeletePost = async (id) =>{
-        await deleteDoc(doc(db,"posts",id))
-        window.location.reload()
-    }
+  const getUserPost = async () => {
+    const q = query(
+      collection(db, "posts"),
+      where("email", "==", session?.user?.email)
+    );
+    const querySnapshot = await getDocs(q);
+    const posts = [];
+    querySnapshot.forEach((doc) => {
+      let data = doc.data();
+      data.id = doc.id;
+      posts.push(data);
+    });
+    setUserPost(posts);
+  };
 
-    return (
-        <div className='p-6 mt-6'>
-            <h2 className='text-[30px] text-center font-extrabold text-gray-200'>Profile</h2>
-            <p className='text-center text-white'>Manage Your Posts</p>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5 px-10 mb-4'>
-                {
-                    userPost && userPost?.map((item) => (
-                        <div key={item.name}>
-                            <PostItems post={item} />
-                            <button className='bg-red-700 w-full rounded-md text-white p-1 mt-1 hover:bg-red-600'
-                            onClick={()=>onDeletePost(item.id)}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    ))
-                }
+  const onDeletePost = async (id) => {
+    await deleteDoc(doc(db, "posts", id));
+    setUserPost((prevPosts) => prevPosts.filter((post) => post.id !== id));
+  };
+
+  return (
+    <div className="p-6 mt-6">
+      <h2 className="text-[30px] text-center font-extrabold text-yellow-300">
+        Your Profile
+      </h2>
+      <p className="text-center text-yellow-100">Manage Your Game Posts</p>
+
+      {userPost?.length === 0 ? (
+        <p className="text-center text-white mt-6">No posts found.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-6 px-10 mb-4">
+          {userPost.map((item) => (
+            <div
+              key={item.id}
+              className="bg-yellow-200 p-2 rounded-xl shadow-md hover:bg-yellow-300 transition-all duration-300"
+            >
+              <PostItems post={item} />
+              <button
+                className="bg-red-700 w-full rounded-md text-white p-2 mt-2 hover:bg-red-600 font-semibold transition-colors duration-300"
+                onClick={() => onDeletePost(item.id)}
+              >
+                Delete
+              </button>
             </div>
+          ))}
         </div>
-    )
-}
+      )}
+    </div>
+  );
+};
 
-export default profile
+export default Profile;

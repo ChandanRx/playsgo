@@ -13,7 +13,6 @@ const Posts = ({ posts }) => {
                     posts.map((item) => (
                         <div onClick={()=>{document.getElementById('my_modal_1').showModal();setPost(item)}} key={item.title}>
                             <PostItems post={item} />
-                            
                         </div>
                     ))
                 }
